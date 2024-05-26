@@ -6,11 +6,13 @@ $pdo = null;
 $stmt = null;
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=bbs-yt', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=bbs-yt', 'matsumo333', '3112');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     error_log($e->getMessage());
+    echo 'データベース接続エラー: ' . $e->getMessage();
     die('データベース接続に失敗しました。');
+    echo 'データベース接続エラー: ' . $e->getMessage();
 }
 
 //フォームを打ち込んだ時
@@ -35,12 +37,6 @@ if (!empty($_POST["submitButton"])) {
             echo '投稿に失敗しました。詳細: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
         }
     }
-}
-//DB接続
-try {
-    $pdo =  new PDO('mysql:host=localhost;dbname=bbs-yt', 'root', '');
-} catch (PDOException $e) {
-    echo $e->getMessage();
 }
 
 //DBからコメントデータを取得する
